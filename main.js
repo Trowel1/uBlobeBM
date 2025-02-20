@@ -9,14 +9,31 @@ setTimeout(() => {
     let isOpening = false;
     let isClosing = false;
     
-    document.addEventListener("keydown", function (blob) {
-        if (blob.code == "Backquote" && blob.ctrlKey && blob.shiftKey && !blobFrame && !isClosing) {
-            isOpening = true;            
-            if (blobFrame) {
-                closeWithAnimation(blobFrameContainer);
-                blobFrame = null;
-                return;
-            }
+document.addEventListener("mousedown", function(event) {
+    if (event.button === 1) { // Middle mouse button (scroll wheel) pressed
+        console.log("Scroll wheel button pressed!");
+        event.preventDefault(); // Prevents unwanted scrolling behavior
+    }
+});
+
+document.addEventListener("mouseup", function(event) {
+    if (event.button === 1) { // Middle mouse button released
+        console.log("Scroll wheel button released!");
+    }
+});
+
+document.addEventListener("keydown", function(event) {
+    if (event.code === "Backquote" && event.ctrlKey && event.shiftKey && !blobFrame && !isClosing) {
+        isOpening = true;            
+        if (blobFrame) {
+            closeWithAnimation(blobFrameContainer);
+            blobFrame = null;
+            return;
+        }
+        console.log("Ctrl + Shift + Backquote pressed!");
+    }
+});
+
 
             blobFrameContainer = document.createElement("div");
             blobFrameContainer.style.cssText = `
